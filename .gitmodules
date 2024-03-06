@@ -1,0 +1,7 @@
+[submodule "Extension/vendor/imgui"]
+	path = Extension/vendor/imgui
+	url = https://github.com/ocornut/imgui
+	branch = docking
+[submodule "Mod/vendor/gmsl"]
+	path = Mod/vendor/gmsl
+	url = https://github.com/GMSLoader/gmsl.git
