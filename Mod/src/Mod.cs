@@ -62,7 +62,9 @@ public class Mod : IGMSLMod
             new UndertaleExtensionVarType[] { 
                 UndertaleExtensionVarType.String,
                 UndertaleExtensionVarType.String 
-        });
+            },
+            UndertaleExtensionVarType.String
+        );
 
         CreateFunction("imgui_button",
             new UndertaleExtensionVarType[] { 
@@ -74,16 +76,25 @@ public class Mod : IGMSLMod
                 UndertaleExtensionVarType.String, 
                 UndertaleExtensionVarType.Double
         });
+
+        CreateFunction("imgui_slider",
+            new UndertaleExtensionVarType[] { 
+                UndertaleExtensionVarType.String, 
+                UndertaleExtensionVarType.Double, 
+                UndertaleExtensionVarType.Double, 
+                UndertaleExtensionVarType.Double
+        });
     }
 
-    private void CreateFunction(string name, UndertaleExtensionVarType[] args)
+    private void CreateFunction(string name, UndertaleExtensionVarType[] args, UndertaleExtensionVarType ret = UndertaleExtensionVarType.Double)
     {
         var fn = new UndertaleExtensionFunction()
         {
             Name = _data.Strings.MakeString(name),
             ExtName = _data.Strings.MakeString(name),
             Kind = 11,
-            ID = _currentId
+            ID = _currentId,
+            RetType = ret
         };
 
         foreach (var arg in args)

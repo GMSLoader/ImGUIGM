@@ -5,6 +5,7 @@
 #include "imgui.h"
 #include "backends/imgui_impl_win32.h"
 #include "backends/imgui_impl_dx11.h"
+#include "misc/cpp/imgui_stdlib.h"
 
 #define YYEXPORT extern "C" __declspec(dllexport)
 
@@ -86,10 +87,9 @@ YYEXPORT double imgui_input_real(char* label, double val, char* format)
 
 YYEXPORT char* imgui_input_text(char* label, char* text) 
 { 
-    char txt[1024];
-    snprintf(txt, sizeof(txt), "%s", text);
-    ImGui::InputText(label, txt, 1024);
-    return txt;
+	std::string txt(text);
+    ImGui::InputText(label, &txt);
+    return (char*)txt.c_str();
 }
 
 YYEXPORT double imgui_button(char* label) { return ImGui::Button(label); }
@@ -98,4 +98,11 @@ YYEXPORT double imgui_checkbox(char* label, double value)
 	bool val = (value != 0);
 	ImGui::Checkbox(label, &val); 
 	return val;
+}
+
+YYEXPORT double imgui_slider(char* label, double min, double max, double v)
+{
+	float fv = (float)v;
+	ImGui::SliderFloat(label, &fv, min, max, "%.2f");
+	return (double)fv;
 }
