@@ -72,6 +72,7 @@ public class Mod : IGMSLMod
         CreateFunction("imgui_checkbox",
             new UndertaleExtensionVarType[] { 
                 UndertaleExtensionVarType.String, 
+                UndertaleExtensionVarType.Double
         });
     }
 

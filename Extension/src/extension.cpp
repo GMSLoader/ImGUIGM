@@ -93,4 +93,9 @@ YYEXPORT char* imgui_input_text(char* label, char* text)
 }
 
 YYEXPORT double imgui_button(char* label) { return ImGui::Button(label); }
-YYEXPORT double imgui_checkbox(char* label) { bool c; return ImGui::Checkbox(label, &c); }
+YYEXPORT double imgui_checkbox(char* label, double value) 
+{ 
+	bool val = (value != 0);
+	ImGui::Checkbox(label, &val); 
+	return val;
+}
