@@ -20,3 +20,5 @@ target_link_libraries(Extension PRIVATE "d3d11.lib" "dxgi.lib" "d3dcompiler.lib"
 add_custom_command(TARGET Extension POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Extension> "${OutDir}/"
 )
+
+add_compile_definitions(NDEBUG)
