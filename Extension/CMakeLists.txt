@@ -20,6 +20,8 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 target_link_libraries(Extension PRIVATE "d3d11.lib" "dxgi.lib" "d3dcompiler.lib" "dwmapi.lib" "Comctl32.lib" -static-libgcc -static-libstdc++ Threads::Threads)
 
+set_target_properties(Extension PROPERTIES OUTPUT_NAME "libExtension")
+
 add_custom_command(TARGET Extension POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Extension> "${OutDir}/"
 )
