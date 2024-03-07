@@ -8,23 +8,23 @@
 #include "misc/cpp/imgui_stdlib.h"
 
 #define YYEXPORT extern "C" __declspec(dllexport)
-
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-LRESULT CALLBACK ImGuiGMSSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam,
-	LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData) {
 
-	if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam)) {
+LRESULT CALLBACK ImGuiGMSSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam,
+	LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData) 
+{
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
 		return true;
-	}
 
 	return DefSubclassProc(hWnd, uMsg, wParam, lParam);
 }
 
-YYEXPORT double imgui_init(char* hwnd, char* device, char* device_context) {
+YYEXPORT double imgui_init(char* hwnd, char* device, char* device_context) 
+{
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	ImGuiIO& io = ImGui::GetIO();
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
@@ -43,7 +43,8 @@ YYEXPORT double imgui_init(char* hwnd, char* device, char* device_context) {
 	return 0;
 } 
 
-YYEXPORT double imgui_destroy(char* hwnd) {
+YYEXPORT double imgui_destroy(char* hwnd) 
+{
 	RemoveWindowSubclass((HWND)hwnd, ImGuiGMSSubclassProc, 1);
 
 	ImGui_ImplDX11_Shutdown();
@@ -53,7 +54,8 @@ YYEXPORT double imgui_destroy(char* hwnd) {
 	return 0;
 }
 
-YYEXPORT double imgui_newframe() {
+YYEXPORT double imgui_newframe() 
+{
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
@@ -61,7 +63,8 @@ YYEXPORT double imgui_newframe() {
 	return 0;
 }
 
-YYEXPORT double imgui_render() {
+YYEXPORT double imgui_render() 
+{
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 	ImGuiIO& io = ImGui::GetIO();
@@ -105,4 +108,22 @@ YYEXPORT double imgui_slider(char* label, double min, double max, double v)
 	float fv = (float)v;
 	ImGui::SliderFloat(label, &fv, min, max, "%.2f");
 	return (double)fv;
+}
+
+YYEXPORT double imgui_same_line()
+{
+	ImGui::SameLine();
+	return 0;
+}
+
+YYEXPORT double imgui_indent(double indent)
+{
+	ImGui::Indent(indent);
+	return 0;
+}
+
+YYEXPORT double imgui_unindent(double indent)
+{
+	ImGui::Unindent(indent);
+	return 0;
 }

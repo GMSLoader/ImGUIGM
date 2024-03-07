@@ -12,6 +12,10 @@
     <ProjectReference Private="False" Include="vendor\gmsl\gmsl-modapi\gmsl-modapi.csproj" />
   </ItemGroup>
 
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="defs.json" DestinationFolder="$(OutDir)" />
+  </Target>
+
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="vendor\**\*.*" />
   </ItemGroup>

@@ -1,4 +1,7 @@
-﻿using GMSL;
+﻿using System.Net;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using GMSL;
 using UndertaleModLib;
 using UndertaleModLib.Models;
 
@@ -16,77 +19,21 @@ public class Mod : IGMSLMod
         _data = data;
 
         SetupExtension();
-
-        CreateFunction("imgui_init", 
-            new UndertaleExtensionVarType[] { 
-                UndertaleExtensionVarType.String, 
-                UndertaleExtensionVarType.String, 
-                UndertaleExtensionVarType.String 
-        });
-
-        CreateFunction("imgui_destroy",
-            new UndertaleExtensionVarType[] { 
-                UndertaleExtensionVarType.String, 
-        });
-
-        CreateFunction("imgui_newframe", new UndertaleExtensionVarType[] {});
-        CreateFunction("imgui_render", new UndertaleExtensionVarType[] {});
-        
-        CreateFunction("imgui_begin",
-            new UndertaleExtensionVarType[] { 
-                UndertaleExtensionVarType.String, 
-        });
-
-        CreateFunction("imgui_end", new UndertaleExtensionVarType[] {});
-
-        CreateFunction("imgui_text",
-            new UndertaleExtensionVarType[] { 
-                UndertaleExtensionVarType.String, 
-        });
-
-        CreateFunction("imgui_separator", new UndertaleExtensionVarType[] {});
-
-        CreateFunction("imgui_separator_text",
-            new UndertaleExtensionVarType[] { 
-                UndertaleExtensionVarType.String, 
-        });
-
-        CreateFunction("imgui_input_real", 
-            new UndertaleExtensionVarType[] { 
-                UndertaleExtensionVarType.String, 
-                UndertaleExtensionVarType.Double, 
-                UndertaleExtensionVarType.String 
-        });
-
-        CreateFunction("imgui_input_text", 
-            new UndertaleExtensionVarType[] { 
-                UndertaleExtensionVarType.String,
-                UndertaleExtensionVarType.String 
-            },
-            UndertaleExtensionVarType.String
-        );
-
-        CreateFunction("imgui_button",
-            new UndertaleExtensionVarType[] { 
-                UndertaleExtensionVarType.String, 
-        });
-
-        CreateFunction("imgui_checkbox",
-            new UndertaleExtensionVarType[] { 
-                UndertaleExtensionVarType.String, 
-                UndertaleExtensionVarType.Double
-        });
-
-        CreateFunction("imgui_slider",
-            new UndertaleExtensionVarType[] { 
-                UndertaleExtensionVarType.String, 
-                UndertaleExtensionVarType.Double, 
-                UndertaleExtensionVarType.Double, 
-                UndertaleExtensionVarType.Double
-        });
+        LoadFunctions(Path.Combine(Environment.CurrentDirectory, "defs.json"));
     }
 
-    private void CreateFunction(string name, UndertaleExtensionVarType[] args, UndertaleExtensionVarType ret = UndertaleExtensionVarType.Double)
+    private void LoadFunctions(string file)
+    {
+        var options = new JsonSerializerOptions();
+        options.Converters.Add(new JsonStringEnumConverter());
+
+        foreach (var definition in JsonSerializer.Deserialize<List<FunctionDefinition>>(File.ReadAllText(file), options))
+        {
+            CreateFunction(definition.Name, definition.ArgumentTypes, definition.ReturnType);
+        }
+    }
+
+    private void CreateFunction(string name, UndertaleExtensionVarType[] args, UndertaleExtensionVarType ret)
     {
         var fn = new UndertaleExtensionFunction()
         {
