@@ -116,5 +116,10 @@
         "ArgumentTypes": [
             "Double"
         ]
+    },
+    {
+        "Name": "imgui_deselected_after_edit",
+        "ReturnType": "Double",
+        "ArgumentTypes": []
     }
 ]

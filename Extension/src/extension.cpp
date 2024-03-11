@@ -127,3 +127,8 @@ YYEXPORT double imgui_unindent(double indent)
 	ImGui::Unindent(indent);
 	return 0;
 }
+
+YYEXPORT double imgui_deselected_after_edit()
+{
+	return ImGui::IsItemDeactivatedAfterEdit();
+}
