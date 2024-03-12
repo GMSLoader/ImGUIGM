@@ -121,5 +121,20 @@
         "Name": "imgui_deselected_after_edit",
         "ReturnType": "Double",
         "ArgumentTypes": []
+    },
+    {
+        "Name": "imgui_any_active",
+        "ReturnType": "Double",
+        "ArgumentTypes": []
+    },
+    {
+        "Name": "imgui_any_focused",
+        "ReturnType": "Double",
+        "ArgumentTypes": []
+    },
+    {
+        "Name": "imgui_is_window_focused",
+        "ReturnType": "Double",
+        "ArgumentTypes": []
     }
 ]

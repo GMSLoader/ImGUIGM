@@ -132,3 +132,18 @@ YYEXPORT double imgui_deselected_after_edit()
 {
 	return ImGui::IsItemDeactivatedAfterEdit();
 }
+
+YYEXPORT double imgui_any_active()
+{
+	return ImGui::IsAnyItemActive();
+}
+
+YYEXPORT double imgui_any_focused()
+{
+	return ImGui::IsAnyItemFocused();
+}
+
+YYEXPORT double imgui_is_window_focused()
+{
+	return ImGui::IsWindowFocused();
+}
