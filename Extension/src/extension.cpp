@@ -113,18 +113,21 @@ YYEXPORT double imgui_slider(char* label, double min, double max, double v)
 YYEXPORT double imgui_same_line()
 {
 	ImGui::SameLine();
+
 	return 0;
 }
 
 YYEXPORT double imgui_indent(double indent)
 {
 	ImGui::Indent(indent);
+
 	return 0;
 }
 
 YYEXPORT double imgui_unindent(double indent)
 {
 	ImGui::Unindent(indent);
+
 	return 0;
 }
 
@@ -146,4 +149,53 @@ YYEXPORT double imgui_any_focused()
 YYEXPORT double imgui_is_window_focused()
 {
 	return ImGui::IsWindowFocused();
+}
+
+long RgbToGm(float rgb[3])
+{
+	// B G R
+	return ((int)rgb[2] * 65536) + ((int)rgb[1] * 256) + (int)rgb[0];
+}
+
+YYEXPORT double imgui_color_edit(char* label, double color)
+{
+	int val = (int)color;
+	byte* colors = reinterpret_cast<byte*>(&val);
+	float col[3] = { colors[0] / 255.0f, colors[1] / 255.0f, colors[2] / 255.0f };
+	ImGui::ColorEdit3(label, col);
+	float temp[3] = { col[0] * 255, col[1] * 255, col[2] * 255 };
+	return RgbToGm(temp);
+}
+
+YYEXPORT double imgui_no_keyboard()
+{
+	ImGuiIO& io = ImGui::GetIO();
+	io.ConfigFlags |= ImGuiConfigFlags_NavNoCaptureKeyboard;
+
+	return 0;
+}
+
+YYEXPORT double imgui_set_mouse_hidden(double hidden)
+{
+	if (hidden)
+		ImGui::SetMouseCursor(ImGuiMouseCursor_None);
+	else
+		ImGui::SetMouseCursor(ImGuiMouseCursor_Arrow);
+
+	return 0;
+}
+
+YYEXPORT double imgui_window_hovered()
+{
+	return ImGui::IsWindowHovered();
+}
+
+YYEXPORT double imgui_item_hovered()
+{
+	return ImGui::IsItemHovered();
+}
+
+YYEXPORT double imgui_any_item_hovered()
+{
+	return ImGui::IsAnyItemHovered();
 }

@@ -136,5 +136,40 @@
         "Name": "imgui_is_window_focused",
         "ReturnType": "Double",
         "ArgumentTypes": []
+    },
+    {
+        "Name": "imgui_color_edit",
+        "ReturnType": "Double",
+        "ArgumentTypes": [
+            "String",
+            "Double"
+        ]
+    },
+    {
+        "Name": "imgui_no_keyboard",
+        "ReturnType": "Double",
+        "ArgumentTypes": []
+    },
+    {
+        "Name": "imgui_set_mouse_hidden",
+        "ReturnType": "Double",
+        "ArgumentTypes": [
+            "Double"
+        ]
+    },
+    {
+        "Name": "imgui_window_hovered",
+        "ReturnType": "Double",
+        "ArgumentTypes": []
+    },
+    {
+        "Name": "imgui_item_hovered",
+        "ReturnType": "Double",
+        "ArgumentTypes": []
+    },
+    {
+        "Name": "imgui_any_item_hovered",
+        "ReturnType": "Double",
+        "ArgumentTypes": []
     }
 ]
