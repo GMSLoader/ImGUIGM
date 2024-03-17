@@ -171,6 +171,7 @@ YYEXPORT double imgui_no_keyboard()
 {
 	ImGuiIO& io = ImGui::GetIO();
 	io.ConfigFlags |= ImGuiConfigFlags_NavNoCaptureKeyboard;
+	io.ConfigFlags &= ImGuiConfigFlags_NavEnableKeyboard;
 
 	return 0;
 }
