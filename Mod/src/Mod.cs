@@ -17,12 +17,7 @@ public class Mod : IGMSLMod
     public void Load(UndertaleData data)
     {
         _data = data;
-
-        SetupExtension();
-        LoadFunctions(Path.Combine(Environment.CurrentDirectory, "defs.json"));
-    }
-
-    private void GetFunctionID(){
+        
         foreach(UndertaleExtension extension in _data.Extensions){
             foreach(UndertaleExtensionFunction function in extension.Functions){
                 if(function.ID >= _currentId){
@@ -31,6 +26,9 @@ public class Mod : IGMSLMod
             }
         }
         _currentId++
+        
+        SetupExtension();
+        LoadFunctions(Path.Combine(Environment.CurrentDirectory, "defs.json"));
     }
 
     private void LoadFunctions(string file)
