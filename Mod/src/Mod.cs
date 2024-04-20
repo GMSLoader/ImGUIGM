@@ -19,7 +19,7 @@ public class Mod : IGMSLMod
         _data = data;
         
         foreach(UndertaleExtension extension in _data.Extensions){
-            foreach(UndertaleExtensionFile file in extension.File){
+            foreach(UndertaleExtensionFile file in extension.Files){
                 foreach(UndertaleExtensionFunction function in file.Functions){
                     if(function.ID >= _currentId){
                         _currentId = function.ID;
