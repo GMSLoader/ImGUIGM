@@ -21,11 +21,11 @@ public class Mod : IGMSLMod
         foreach(UndertaleExtension extension in _data.Extensions){
             foreach(UndertaleExtensionFunction function in extension.Functions){
                 if(function.ID >= _currentId){
-                    _currentId = function.ID
+                    _currentId = function.ID;
                 }
             }
         }
-        _currentId++
+        _currentId++;
         
         SetupExtension();
         LoadFunctions(Path.Combine(Environment.CurrentDirectory, "defs.json"));
