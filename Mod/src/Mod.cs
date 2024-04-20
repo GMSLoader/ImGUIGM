@@ -22,6 +22,16 @@ public class Mod : IGMSLMod
         LoadFunctions(Path.Combine(Environment.CurrentDirectory, "defs.json"));
     }
 
+    private void GetFunctionID(){
+        foreach(UndertaleExtension extension in _data.Extensions){
+            foreach(UndertaleExtensionFunction function in extension.Functions){
+                if(function.ID >= _currentId){
+                    _currentId = function.ID + 1
+                }
+            }
+        }
+    }
+
     private void LoadFunctions(string file)
     {
         var options = new JsonSerializerOptions();
