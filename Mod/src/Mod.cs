@@ -26,10 +26,11 @@ public class Mod : IGMSLMod
         foreach(UndertaleExtension extension in _data.Extensions){
             foreach(UndertaleExtensionFunction function in extension.Functions){
                 if(function.ID >= _currentId){
-                    _currentId = function.ID + 1
+                    _currentId = function.ID
                 }
             }
         }
+        _currentId++
     }
 
     private void LoadFunctions(string file)
