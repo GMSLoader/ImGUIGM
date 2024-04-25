@@ -14,12 +14,12 @@ public class Mod : IGMSLMod
     private uint _currentId = 1;
     private UndertaleData _data;
 
-    public void Load(UndertaleData data)
+    public void Load(UndertaleData data, ModInfo info)
     {
         _data = data;
 
         SetupExtension();
-        LoadFunctions(Path.Combine(Environment.CurrentDirectory, "defs.json"));
+        LoadFunctions(Path.Combine(info.ModDir, "defs.json"));
     }
 
     private void LoadFunctions(string file)

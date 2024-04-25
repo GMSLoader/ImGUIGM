@@ -1,0 +1,7 @@
+{
+    "Name": "ImGUIGM",
+    "ID": "me.name.ImGUIGM",
+    "Version": "1.0.0",
+    "Description": "Lets gmsl mods use imgui",
+    "Dependencies": []
+}
