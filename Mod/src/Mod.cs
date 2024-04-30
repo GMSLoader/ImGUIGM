@@ -18,7 +18,7 @@ public class Mod : IGMSLMod
         _data = data;
         
         SetupExtension();
-        LoadFunctions(Path.Combine(info.ModDir, "defs.json"));
+        LoadFunctions(Path.Combine(info.ModDir, "defs.json")); 
     }
 
     private void LoadFunctions(string file)
