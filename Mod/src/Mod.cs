@@ -11,27 +11,11 @@ public class Mod : IGMSLMod
 {
 
     private UndertaleExtensionFile _extension;
-    private uint _currentId = 1;
     private UndertaleData _data;
 
     public void Load(UndertaleData data, ModInfo info)
     {
         _data = data;
-        
-        foreach (var extension in _data.Extensions)
-        {
-            foreach (var file in extension.Files)
-            {
-                foreach (var function in file.Functions)
-                {
-                    if (function.ID >= _currentId)
-                    {
-                        _currentId = function.ID;
-                    }
-                }
-            }
-        }
-        _currentId++;
         
         SetupExtension();
         LoadFunctions(Path.Combine(info.ModDir, "defs.json"));
@@ -55,7 +39,7 @@ public class Mod : IGMSLMod
             Name = _data.Strings.MakeString(name),
             ExtName = _data.Strings.MakeString(name),
             Kind = 11,
-            ID = _currentId,
+            ID = Extension.NextId(),
             RetType = ret
         };
 
@@ -65,7 +49,6 @@ public class Mod : IGMSLMod
         }
 
         _extension.Functions.Add(fn);
-        _currentId++;
     }
 
     private void SetupExtension()
