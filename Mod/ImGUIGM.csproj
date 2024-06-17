@@ -6,10 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Private="True" Include="vendor\gmsl\gmsl-modapi\gmsl-modapi.csproj" />
+    <ProjectReference Private="False" Include="vendor\gmsl\gmsl-modapi\gmsl-modapi.csproj" />
   </ItemGroup>
 
   <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
@@ -18,7 +19,7 @@
   </Target>
 
   <ItemGroup>
-    <Compile Include="**\*.cs" Exclude="vendor\**\*.*" />
+    <Compile Include="src/**/*.cs" />
   </ItemGroup>
 
 </Project>
