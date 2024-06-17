@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Private="False" Include="vendor\gmsl\gmsl-modapi\gmsl-modapi.csproj" />
+    <ProjectReference Private="True" Include="vendor\gmsl\gmsl-modapi\gmsl-modapi.csproj" />
   </ItemGroup>
 
   <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
